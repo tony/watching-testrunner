@@ -41,7 +41,7 @@ class FileWatcher(object):
             itemname = os.path.join(topdir, item)
             if os.path.isdir(itemname):
                 change_in_subdirectory = self.did_files_change(itemname)
-                if change_in_subdirectory == True:
+                if change_in_subdirectory:
                     change_detected = True
         return change_detected
 
@@ -56,7 +56,7 @@ class FileWatcher(object):
         while True:
             if self.did_files_change():
                 command.execute()
-                print " -- done --"
+                print(" -- done --")
             time.sleep(1)
 
 
@@ -67,6 +67,7 @@ class Command(object):
     def execute(self):
         os.system(self.cmd)
 
+
 def option_parser():
     usage = "usage: %prog [options] command [arguments...]"
     parser = OptionParser(usage)
@@ -76,6 +77,7 @@ def option_parser():
                       help="glob-style pattern for file names to watch")
     return parser
 
+
 def parse_options_and_shell_command():
     parser = option_parser()
     (options, positional_arguments) = parser.parse_args()
@@ -84,6 +86,7 @@ def parse_options_and_shell_command():
         parser.error("No command provided")
 
     return (options, shell_command)
+
 
 def main(unused_argv=None):
     options, shell_command = parse_options_and_shell_command()

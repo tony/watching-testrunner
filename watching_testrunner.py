@@ -12,10 +12,10 @@ class FileWatcher(object):
         self.basepath = basepath
         self.wildcard = watch_wildcard
         self.existing_files = {}
-    
+
     def file_did_change(self, filename):
         change_detected = False
-        
+
         current_mtime = os.path.getmtime(filename)
         if filename in self.existing_files:
             known_mtime = self.existing_files[filename]
@@ -26,7 +26,7 @@ class FileWatcher(object):
             change_detected = True
         self.existing_files[filename] = current_mtime
         return change_detected
-    
+
     def _check_for_file_changes_in_dir(self, topdir):
         change_detected = False
         filenames = glob.glob(os.path.join(topdir, self.wildcard))
@@ -34,7 +34,7 @@ class FileWatcher(object):
             if self.file_did_change(filename):
                 change_detected = True
         return change_detected
-    
+
     def _check_for_changes_in_subdirs(self, topdir):
         change_detected = False
         for item in os.listdir(topdir):
@@ -44,26 +44,26 @@ class FileWatcher(object):
                 if change_in_subdirectory == True:
                     change_detected = True
         return change_detected
-    
+
     def did_files_change(self, topdir=None):
         if topdir is None:
             topdir = self.basepath
         file_changed = self._check_for_file_changes_in_dir(topdir)
         subdir_changed = self._check_for_changes_in_subdirs(topdir)
         return (file_changed or subdir_changed)
-    
+
     def execute_command_on_change(self, command):
         while True:
             if self.did_files_change():
                 command.execute()
                 print " -- done --"
             time.sleep(1)
-    
+
 
 class Command(object):
     def __init__(self, cmd):
         self.cmd = cmd
-    
+
     def execute(self):
         os.system(self.cmd)
 
@@ -82,7 +82,7 @@ def parse_options_and_shell_command():
     shell_command = " ".join(positional_arguments)
     if shell_command == "":
         parser.error("No command provided")
-    
+
     return (options, shell_command)
 
 def main(unused_argv=None):

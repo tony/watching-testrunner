@@ -1,9 +1,20 @@
 #!/usr/bin/env python
+# -*- coding: utf8 - *-
+"""Command line tool for watching files and re-running shell commands.
+
+watching_testrunner
+~~~~~~~~~~~~~~~~~~~
+
+"""
+
+from __future__ import absolute_import, division, print_function, \
+    with_statement, unicode_literals
 
 import glob
 import os
 import sys
 import time
+
 from optparse import OptionParser
 
 

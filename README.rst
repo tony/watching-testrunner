@@ -35,21 +35,21 @@ Examples
 
 .. code-block:: bash
 
-    $ watching_testrunner nosetessts
+    $ watching_testrunner nosetests
 
 This will run nosetests whenever any python file below the current
 directory changes
 
 .. code-block:: bash
 
-    $ watching_testrunner -- nosetessts $NOSETESTS_ARGUMENTS
+    $ watching_testrunner -- nosetests $NOSETESTS_ARGUMENTS
 
 Will run nosetests all the same, but will not try to parse any of the
 nosetests arguments.
 
 .. code-block:: bash
 
-    $ watching_testrunner --basepath foo/bar --pattern="*" nosetessts $NOSETESTS_ARGUMENTS
+    $ watching_testrunner --basepath foo/bar --pattern="*" nosetests $NOSETESTS_ARGUMENTS
 
 This will run nosetests whenever any file below ./foo/bar changes.
 

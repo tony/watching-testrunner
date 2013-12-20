@@ -21,7 +21,7 @@ Usage
 .. code-block:: bash
 
     % watching_testrunner --help
-    Usage: watching_testrunner [options] command [arguments...]
+    Usage: watching_testrunner [options] [--] command [arguments...]
 
     Options:
       -h, --help            show this help message and exit
@@ -35,10 +35,17 @@ Examples
 
 .. code-block:: bash
 
-    $ watching_testrunner nosetessts $NOSETESTS_ARGUMENTS
+    $ watching_testrunner nosetessts
 
 This will run nosetests whenever any python file below the current
 directory changes
+
+.. code-block:: bash
+
+    $ watching_testrunner -- nosetessts $NOSETESTS_ARGUMENTS
+
+Will run nosetests all the same, but will not try to parse any of the
+nosetests arguments.
 
 .. code-block:: bash
 

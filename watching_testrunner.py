@@ -80,7 +80,7 @@ class Command(object):
 
 
 def option_parser():
-    usage = "usage: %prog [options] command [arguments...]"
+    usage = "usage: %prog [options] [--] command [arguments...]"
     parser = OptionParser(usage)
     parser.add_option("-b", "--basepath", dest="basepath", default=".",
                       help="base path to watch for changes")

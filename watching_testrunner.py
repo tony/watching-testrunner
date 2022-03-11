@@ -10,23 +10,22 @@ watching_testrunner
 from __future__ import absolute_import, division, print_function, \
     with_statement, unicode_literals
 
+import argparse
 import glob
 import os
 import sys
 import time
 
-from optparse import OptionParser
-
 
 class FileWatcher(object):
-    def __init__(self, basepath, watch_wildcard):
-        self.basepath = basepath
-        self.wildcard = watch_wildcard
+    def __init__(self, basepaths, patterns):
+        self.basepaths = basepaths
+        self.patterns = patterns
         self.existing_files = {}
 
     def file_did_change(self, filename):
         change_detected = False
-
+        
         current_mtime = os.path.getmtime(filename)
         if filename in self.existing_files:
             known_mtime = self.existing_files[filename]
@@ -35,16 +34,22 @@ class FileWatcher(object):
         else:
             # TODO: Currently there is no handling of deleted files.
             change_detected = True
+        
         self.existing_files[filename] = current_mtime
         return change_detected
-
+    
+    def _glob(self, topdir):
+        for pattern in self.patterns:
+            for file in glob.iglob(os.path.join(topdir, pattern)):
+                yield file
+    
     def _check_for_file_changes_in_dir(self, topdir):
-        change_detected = False
-        filenames = glob.glob(os.path.join(topdir, self.wildcard))
-        for filename in filenames:
+        did_change = False
+        # Iterating over all files, to record all changes
+        for filename in self._glob(topdir):
             if self.file_did_change(filename):
-                change_detected = True
-        return change_detected
+                did_change = True
+        return did_change
 
     def _check_for_changes_in_subdirs(self, topdir):
         change_detected = False
@@ -58,7 +63,9 @@ class FileWatcher(object):
 
     def did_files_change(self, topdir=None):
         if topdir is None:
-            topdir = self.basepath
+            # not using a generator to ensure all file changes are recorded
+            return any([self.did_files_change(topdir) for topdir in self.basepaths])
+        
         file_changed = self._check_for_file_changes_in_dir(topdir)
         subdir_changed = self._check_for_changes_in_subdirs(topdir)
         return (file_changed or subdir_changed)
@@ -80,30 +87,39 @@ class Command(object):
 
 
 def option_parser():
-    usage = "usage: %prog [options] [--] command [arguments...]"
-    parser = OptionParser(usage)
-    parser.add_option("-b", "--basepath", dest="basepath", default=".",
-                      help="base path to watch for changes")
-    parser.add_option("-p", "--pattern", dest="watch_wildcard", default="*.py",
-                      help="glob-style pattern for file names to watch")
+    parser = argparse.ArgumentParser(description='Execute command on file changes')
+    parser.add_argument(
+        "-b", "--basepath", action='append', metavar="BASEPATH", dest="basepaths",
+        help="base paths to watch for changes. Default: .")
+    parser.add_argument(
+        "-p", "--pattern", action='append', metavar="PATTERN", dest="patterns",
+        help="glob-style patterns for file names to watch. Default: *.py")
+    parser.add_argument(
+        metavar="COMMAND", dest='command', nargs='+',
+        help="shell command to invoke on each chanege. Separate with -- from other arguments if neccessary")
     return parser
 
 
 def parse_options_and_shell_command():
     parser = option_parser()
-    (options, positional_arguments) = parser.parse_args()
-    shell_command = " ".join(positional_arguments)
-    if shell_command == "":
-        parser.error("No command provided")
-
-    return (options, shell_command)
+    options = parser.parse_args()
+    if options.basepaths is None:
+        options.basepaths = ["."]
+    
+    if options.patterns is None:
+        options.patterns = ["*.py"]
+    
+    # REFACT remove concatenation and switch to subprocess.run
+    options.command = " ".join(options.command)
+    
+    return options
 
 
 def main(unused_argv=None):
-    options, shell_command = parse_options_and_shell_command()
-    watcher = FileWatcher(options.basepath, options.watch_wildcard)
+    options = parse_options_and_shell_command()
+    watcher = FileWatcher(options.basepaths, options.patterns)
     try:
-        watcher.execute_command_on_change(Command(shell_command))
+        watcher.execute_command_on_change(Command(options.command))
     except KeyboardInterrupt:
         pass
 

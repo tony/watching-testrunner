@@ -1,0 +1,39 @@
+Changes
+=======
+
+1.2.0 - tbd
+-----------
+
+Bug fixes:
+- Fix issue detecting file changes (#2, @dwt)
+
+Compatibility:
+- Migrate from `OptionParser` to `argparse` argparse (#2, @dwt)
+
+Development:
+- Update `.gitignore` to catch more cache / virtualenv / editors
+
+1.1.0 - 2013-12-10
+------------------
+
+Packaging:
+- MANIFEST.in file name fix
+- Add classifiers
+
+Compatibility:
+
+- `__future__` statements, general python 3 compatibility
+- Python 3 compatible `print()`
+
+Development:
+
+- PEP8
+- Add `.gitignore`
+
+Documentation:
+
+- README to reStructuredText
+
+<!---
+# vim: set filetype=rst:
+-->

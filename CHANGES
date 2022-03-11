@@ -5,12 +5,15 @@ Changes
 ------------------
 
 Bug fixes:
+
 - Fix issue detecting file changes (#2, @dwt)
 
 Compatibility:
+
 - Migrate from `OptionParser` to `argparse` argparse (#2, @dwt)
 
 Development:
+
 - Update `.gitignore` to catch more cache / virtualenv / editors
 
 1.1.0 - 2013-12-10

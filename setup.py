@@ -10,7 +10,7 @@ setup(
     description="Automatic test execution on file changes",
     long_description=open('README.rst').read(),
     url='https://github.com/tony/watching-testrunner',
-    version='1.2.0b0',
+    version='1.2.0',
     classifiers=[
         "License :: OSI Approved :: BSD License",
         "Programming Language :: Python",

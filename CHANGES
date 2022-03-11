@@ -1,8 +1,8 @@
 Changes
 =======
 
-1.2.0 - tbd
------------
+1.2.0 - 2022-03-11
+------------------
 
 Bug fixes:
 - Fix issue detecting file changes (#2, @dwt)

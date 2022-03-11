@@ -25,7 +25,7 @@ class FileWatcher(object):
 
     def file_did_change(self, filename):
         change_detected = False
-
+        
         current_mtime = os.path.getmtime(filename)
         if filename in self.existing_files:
             known_mtime = self.existing_files[filename]
@@ -34,6 +34,7 @@ class FileWatcher(object):
         else:
             # TODO: Currently there is no handling of deleted files.
             change_detected = True
+        
         self.existing_files[filename] = current_mtime
         return change_detected
     
@@ -43,11 +44,12 @@ class FileWatcher(object):
                 yield file
     
     def _check_for_file_changes_in_dir(self, topdir):
-        change_detected = False
+        did_change = False
+        # Iterating over all files, to record all changes
         for filename in self._glob(topdir):
             if self.file_did_change(filename):
-                change_detected = True
-        return change_detected
+                did_change = True
+        return did_change
 
     def _check_for_changes_in_subdirs(self, topdir):
         change_detected = False
@@ -61,7 +63,8 @@ class FileWatcher(object):
 
     def did_files_change(self, topdir=None):
         if topdir is None:
-            return any(self.did_files_change(topdir) for topdir in self.basepaths)
+            # not using a generator to ensure all file changes are recorded
+            return any([self.did_files_change(topdir) for topdir in self.basepaths])
         
         file_changed = self._check_for_file_changes_in_dir(topdir)
         subdir_changed = self._check_for_changes_in_subdirs(topdir)

@@ -84,7 +84,6 @@ class Command(object):
 
 
 def option_parser():
-    usage = "usage: %prog [options] [--] command [arguments...]"
     parser = argparse.ArgumentParser(description='Execute command on file changes')
     parser.add_argument(
         "-b", "--basepath", action='append', metavar="BASEPATH", dest="basepaths",
@@ -109,6 +108,7 @@ def parse_options_and_shell_command():
     
     # REFACT remove concatenation and switch to subprocess.run
     options.command = " ".join(options.command)
+    
     return options
 
 

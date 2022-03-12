@@ -29,18 +29,17 @@ setup(
         "Topic :: System :: Shells",
         "Topic :: Software Development :: Testing",
         "Topic :: Utilities",
-
     ],
     project_urls={
         'Documentation': 'https://github.com/tony/watching-testrunner',
         'Changes': 'https://github.com/tony/watching-testrunner/blob/master/CHANGES',
         'Code': 'https://github.com/tony/watching-testrunner',
         'Issue tracker': 'https://github.com/tony/watching-testrunner/issues',
-        'Q & A': 'https://github.com/tony/watching-testrunner/discussions'
+        'Q & A': 'https://github.com/tony/watching-testrunner/discussions',
     },
     author="Felix Schwarz, Martin Häcker, Robert Buchholz",
     author_email="felix.schwarz@web.de, spamfaenger@gmx.de, rbu@rbu.sh, "
-                 "tony@git-pull.com",
+    "tony@git-pull.com",
     keywords="unit testing automation automatic test runner",
     py_modules=['watching_testrunner'],
     zip_safe=True,

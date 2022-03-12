@@ -13,7 +13,7 @@ pestered Felix to build something like this, and after using it for about
 a two years, I finally got around to packaging it. :-)
 
 In addition to that it's brain dead simple, has no dependencies and is
-_really_ small.
+*really* small.
 
 Usage
 -----

@@ -1,10 +1,30 @@
 # Changes
 
+## v1.2.1 (2022-03-12)
+
+## Documentation
+
+### Packaging
+
+- Add python 3.10 to trove classifiers
+
+### Development
+
+- Format with black
+
+### Documentation
+
+- Move from reStructuredText to Markdown
+
 ## v1.2.0 (2022-03-11)
 
 ### Bug fixes
 
 - Fix issue detecting file changes (#2, @dwt)
+
+### Packaging
+
+- Remove 2.6 and add 3.4 to 3.9 to trove classifiers(#2, @dwt)
 
 ### Compatibility
 

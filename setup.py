@@ -11,7 +11,7 @@ setup(
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/tony/watching-testrunner',
-    version='1.2.1b0',
+    version='1.2.1',
     classifiers=[
         "License :: OSI Approved :: BSD License",
         "Programming Language :: Python",

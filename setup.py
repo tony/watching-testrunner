@@ -8,7 +8,8 @@ here = os.path.abspath(os.path.dirname(__file__))
 setup(
     name='watching_testrunner',
     description="Automatic test execution on file changes",
-    long_description=open('README.rst').read(),
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     url='https://github.com/tony/watching-testrunner',
     version='1.2.0',
     classifiers=[

@@ -1,8 +1,6 @@
-Changes
-=======
+# Changes
 
-1.2.0 - 2022-03-11
-------------------
+## 1.2.0 - 2022-03-11
 
 Bug fixes:
 
@@ -10,18 +8,15 @@ Bug fixes:
 
 Compatibility:
 
-- Migrate from `OptionParser` to `argparse` argparse (#2, @dwt)
+- Migrate from `OptionParser` to `argarse` (#2, @dwt)
 
 Development:
 
 - Update `.gitignore` to catch more cache / virtualenv / editors
 
-1.1.0 - 2013-12-10
-------------------
+## 1.1.0 - 2013-12-10
 
-Packaging:
-- MANIFEST.in file name fix
-- Add classifiers
+Packaging: - MANIFEST.in file name fix - Add classifiers
 
 Compatibility:
 
@@ -37,4 +32,6 @@ Documentation:
 
 - README to reStructuredText
 
-.. vim: set filetype=rst:
+<!---
+# vim: set filetype=markdown:
+-->

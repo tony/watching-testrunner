@@ -1,6 +1,6 @@
 # Changes
 
-## 1.2.0 - 2022-03-11
+## v1.2.0 (2022-03-11)
 
 Bug fixes:
 
@@ -14,7 +14,7 @@ Development:
 
 - Update `.gitignore` to catch more cache / virtualenv / editors
 
-## 1.1.0 - 2013-12-10
+## v1.1.0 (2013-12-10)
 
 Packaging: - MANIFEST.in file name fix - Add classifiers
 

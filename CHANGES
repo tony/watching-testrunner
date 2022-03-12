@@ -2,15 +2,15 @@
 
 ## v1.2.0 (2022-03-11)
 
-Bug fixes:
+### Bug fixes
 
 - Fix issue detecting file changes (#2, @dwt)
 
-Compatibility:
+### Compatibility
 
 - Migrate from `OptionParser` to `argarse` (#2, @dwt)
 
-Development:
+### Development
 
 - Update `.gitignore` to catch more cache / virtualenv / editors
 
@@ -18,17 +18,17 @@ Development:
 
 Packaging: - MANIFEST.in file name fix - Add classifiers
 
-Compatibility:
+### Compatibility
 
 - `__future__` statements, general python 3 compatibility
 - Python 3 compatible `print()`
 
-Development:
+### Development
 
 - PEP8
 - Add `.gitignore`
 
-Documentation:
+### Documentation
 
 - README to reStructuredText
 

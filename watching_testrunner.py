@@ -59,12 +59,24 @@ class FileWatcher(object):
     def _check_for_changes_in_subdirs(self, topdir):
         change_detected = False
         for item in os.listdir(topdir):
+            item = self._force_unicode_py2(item)
             itemname = os.path.join(topdir, item)
-            if os.path.isdir(itemname):
+            # os.path.isdir() calls os.stat() which bombs on the exact circumstances
+            # outlined in _force_unicode_py2()
+            if os.path.isdir(itemname.encode('utf8')):
                 change_in_subdirectory = self.did_files_change(itemname)
                 if change_in_subdirectory:
                     change_detected = True
         return change_detected
+
+    def _force_unicode_py2(self, a_string):
+        # on CentOS 7, the system python 2 sometimes returns bytes from os.listdir()
+        # even though the documentation says it should always return unicode if given unicode params
+        # It does that for filenames like this: '3-\xe5\x9c\x9f\xe7\x9f\xb3\xe6\xb5\x81.qti.xml'
+        if sys.version_info[0] == 2 and type(a_string) is not unicode:
+            return a_string.decode('utf8')
+
+        return a_string
 
     def did_files_change(self, topdir=None):
         if topdir is None:

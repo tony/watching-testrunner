@@ -1,5 +1,17 @@
 # Changes
 
+## v1.2.2 (?)
+
+### Documentation
+
+- Enhance readme to clarify why the project is built the way it is.
+  #4, @dwt
+
+### Bug fixes
+
+- Fix a python 2 issue on centos 7, where traditional chinese
+  in filenames tripped up python 2's `os.listdir()`. #5, @dwt
+
 ## v1.2.1 (2022-03-12)
 
 ### Documentation
